@@ -1,0 +1,72 @@
+@import 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* CrosX design tokens. Names follow shadcn/ui, so `shadcn add` components inherit the theme. */
+:root {
+  --background: #f6f6f8;
+  --foreground: #121216;
+  --card: #ffffff;
+  --card-foreground: #121216;
+  --muted: #f0f0f3;
+  --muted-foreground: #66666f;
+  --border: #e4e4e9;
+  --input: #d9d9e0;
+  --primary: #e00f0c;
+  --primary-foreground: #ffffff;
+  --sidebar: #ffffff;
+  --success: #0f7d52;
+  --warning: #a8650a;
+  --info: #2158d6;
+  --ring: #e00f0c;
+  --radius: 0.625rem;
+}
+.dark {
+  --background: #0a0a0c;
+  --foreground: #f3f3f5;
+  --card: #121215;
+  --card-foreground: #f3f3f5;
+  --muted: #1a1a1f;
+  --muted-foreground: #9a9aa5;
+  --border: #25252b;
+  --input: #30303a;
+  --primary: #f1110e;
+  --sidebar: #0e0e11;
+  --success: #34d399;
+  --warning: #fbbf24;
+  --info: #7aa7ff;
+  --ring: #f1110e;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+@layer base {
+  * { border-color: var(--border); }
+  body { background: var(--background); color: var(--foreground); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+  :focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+}
+
+/* Added for ~300ms by the theme toggle: colours only, so nothing shifts or flashes. */
+.theme-anim, .theme-anim *, .theme-anim *::before, .theme-anim *::after {
+  transition: background-color .25s ease, border-color .25s ease, color .25s ease, fill .25s ease, stroke .25s ease !important;
+}
+@media (prefers-reduced-motion: reduce) { * { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
